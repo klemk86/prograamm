@@ -1,3 +1,24 @@
 bazzar.loc {
-reverse_proxy bazarr:6969
+    reverse_proxy   bazarr:6969
+}
+sonarr.loc {
+    reverse_proxy   sonarr:8989
+}
+jackett.loc {
+    reverse_proxy   jackett:9117
+}
+ombi.loc {
+    reverse_proxy   ombi:3579
+}
+radarr.loc {
+    reverse_proxy   radarr:7878
+}
+jellyfin.loc {
+    reverse_proxy   jellyfin:8096
+}
+qbit.loc {
+    reverse_proxy   qbittorrent:8080
+}
+organizr.loc {
+    reverse_proxy   organizr:80
 }
