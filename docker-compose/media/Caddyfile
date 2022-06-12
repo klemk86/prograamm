@@ -1,0 +1,3 @@
+bazzar.loc {
+reverse_proxy bazarr:6969
+}
