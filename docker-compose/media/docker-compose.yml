@@ -3,6 +3,7 @@ services:
   caddy:
     container_name: caddy
     image: caddy
+    hostname: caddy
     restart: unless-stopped
     ports:
       - 80:80
@@ -29,6 +30,7 @@ services:
   qbittorrent:
     image: cr.hotio.dev/hotio/qbittorrent:latest
     container_name: qbittorrent
+    hostname: qbit
     environment:
       - PUID=1000
       - PGID=1000
@@ -46,6 +48,7 @@ services:
   bazarr:
     image: cr.hotio.dev/hotio/bazarr:latest
     container_name: bazarr
+    hostname: bazarr
     environment:
       - PUID=1000
       - PGID=1000
@@ -75,6 +78,7 @@ services:
   sonarr:
     image: cr.hotio.dev/hotio/sonarr:latest
     container_name: sonarr
+    hostname: sonarr
     environment:
       - PUID=1000
       - PGID=1000
@@ -90,6 +94,7 @@ services:
   ombi:
     image: cr.hotio.dev/hotio/ombi:latest
     container_name: ombi
+    hostname: ombi
     environment:
       - PUID=1000
       - PGID=1000
@@ -103,6 +108,7 @@ services:
   jellyfin:
     image: cr.hotio.dev/hotio/jellyfin:latest
     container_name: jellyfin
+    hostname: jellyfin
     environment:
       - PUID=1000
       - PGID=1000
