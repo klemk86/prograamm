@@ -10,7 +10,16 @@ services:
       - 443:443
     volumes:
       - /f/docker/media/caddy/etc:/etc/caddy
+      - /f/docker/media/caddy/srv:/srv
       - caddy_data:/data
+   
+  homer:
+    container_name: homer
+    image: bb4bz/homer:latest
+    hostanme: homer
+    restart: unless-stopped
+    volumes:
+      - /f/docker/media/caddy/srv:/www/assets
 
   jackett:
     image: cr.hotio.dev/hotio/jackett:latest
