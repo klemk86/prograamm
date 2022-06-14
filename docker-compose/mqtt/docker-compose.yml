@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  mqtt:
+    image: eclipse-mosquitto:latest
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    networks:
+      - mqtt
+    volumes:
+      - /f/docker/mqtt/mosquitto/config:/mosquitto/config
+      
+  db:
+    image: influxdb
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    networks:
+      - mqtt
+    volumes:
+      - /f/docker/mqtt/db/data:/var/lib/influxdb2
+      - /f/docker/mqtt/db/config:/etc/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=user
+      - DOCKER_INFLUXDB_INIT_PASSWORD=user
+      - DOCKER_INFLUXDB_INIT_ORG=org
+      - DOCKER_INFLUXDB_INIT_BUCKET=bucket
+
+  node-red:
+    image: nodered/node-red:latest
+    restart: unless-stopped
+    ports:
+      - "1880:1880"
+    volumes:
+      - /f/docker/mqtt/node-red:/data
+    depends_on:
+      - mqtt
+      - db
+    networks:
+      - mqtt
+
+  grafana:
+    image: grafana/grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    networks:
+      - mqtt
+    volumes:
+      - /f/docker/mqtt/grafana:/var/lib/grafana
+    depends_on:
+      - db
+
+networks:
+  mqtt:
+      
