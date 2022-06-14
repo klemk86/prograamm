@@ -16,7 +16,7 @@ services:
   homer:
     container_name: homer
     image: bb4bz/homer:latest
-    hostanme: homer
+    hostname: homer
     restart: unless-stopped
     volumes:
       - /f/docker/media/caddy/srv:/www/assets
