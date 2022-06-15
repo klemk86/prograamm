@@ -11,7 +11,7 @@ services:
     volumes:
       - ${CONFIG}/caddy/etc:/etc/caddy
       - ${CONFIG}/caddy/srv:/srv
-      - caddy_data:/data
+      - ${CONFIG}/caddy/data:/data
    
   homer:
     container_name: homer
