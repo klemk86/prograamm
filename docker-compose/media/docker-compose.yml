@@ -18,6 +18,8 @@ services:
     image: b4bz/homer:latest
     hostname: homer
     restart: unless-stopped
+    expose:
+      - 8090
     volumes:
       - ${CONFIG}/caddy/srv:/www/assets
 
