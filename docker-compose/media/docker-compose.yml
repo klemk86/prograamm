@@ -19,7 +19,7 @@ services:
     hostname: homer
     restart: unless-stopped
     expose:
-      - 8090
+      - 8080
     volumes:
       - ${CONFIG}/caddy/srv:/www/assets
 
