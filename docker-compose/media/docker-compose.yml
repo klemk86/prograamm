@@ -21,7 +21,7 @@ services:
     expose:
       - 8080
     volumes:
-      - ${CONFIG}/caddy/srv:/www/assets
+      - ${CONFIG}/homer:/www/assets
 
   jackett:
     image: cr.hotio.dev/hotio/jackett:latest
