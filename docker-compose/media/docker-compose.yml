@@ -9,17 +9,17 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /f/docker/media/caddy/etc:/etc/caddy
-      - /f/docker/media/caddy/srv:/srv
+      - ${CONFIG}/caddy/etc:/etc/caddy
+      - ${CONFIG}/caddy/srv:/srv
       - caddy_data:/data
    
   homer:
     container_name: homer
-    image: bb4bz/homer:latest
+    image: b4bz/homer:latest
     hostname: homer
     restart: unless-stopped
     volumes:
-      - /f/docker/media/caddy/srv:/www/assets
+      - ${CONFIG}/caddy/srv:/www/assets
 
   jackett:
     image: cr.hotio.dev/hotio/jackett:latest
@@ -30,8 +30,8 @@ services:
       - TZ=Europe/Ljubljana
       - AUTO_UPDATE=true #optional
     volumes:
-      - /f/docker/media/jackett:/config
-      - /f/media/downloads:/downloads
+      - ${CONFIG}/jackett:/config
+      - ${MEDIA}/downloads:/downloads
     expose:
       - 9117
     restart: unless-stopped
@@ -46,8 +46,8 @@ services:
       - TZ=Europe/Ljubljana
       - WEBUI_PORT=8080
     volumes:
-      - /f/docker/media/qbit:/config
-      - /f/media/downloads:/downloads
+      - ${CONFIG}/qbit:/config
+      - ${MEDIA}/downloads:/downloads
     expose:
       - 8080
       - 6881
@@ -63,9 +63,9 @@ services:
       - PGID=1000
       - TZ=Europe/Ljubljana
     volumes:
-      - /f/docker/media/bazarr:/config
-      - /f/media/movies:/movies #optional
-      - /f/media/series:/tv #optional
+      - ${CONFIG}/bazarr:/config
+      - ${MEDIA}/movies:/movies #optional
+      - ${MEDIA}/series:/tv #optional
     expose:
       - 6767
 
@@ -77,9 +77,9 @@ services:
       - PGID=1000
       - TZ=Europe/Ljubljana
     volumes:
-      - /f/docker/media/radarr:/config
-      - /f/media/movies:/movies #optional
-      - /f/media/downloads:/downloads #optional
+      - ${CONFIG}/radarr:/config
+      - ${MEDIA}/movies:/movies #optional
+      - ${MEDIA}/downloads:/downloads #optional
     expose:
       - 7878
     restart: unless-stopped
@@ -93,9 +93,9 @@ services:
       - PGID=1000
       - TZ=Europe/Ljubljana
     volumes:
-      - /f/docker/media/sonarr:/config
-      - /f/media/series:/tv #optional
-      - /f/media/downloads:/downloads #optional
+      - ${CONFIG}/sonarr:/config
+      - ${MEDIA}/series:/tv #optional
+      - ${MEDIA}/downloads:/downloads #optional
     expose:
       - 8989
     restart: unless-stopped
@@ -109,7 +109,7 @@ services:
       - PGID=1000
       - TZ=Europe/Ljubljana
     volumes:
-      - /f/docker/media/ombi:/config
+      - ${CONFIG}/ombi:/config
     expose:
       - 3579
     restart: unless-stopped
@@ -123,9 +123,9 @@ services:
       - PGID=1000
       - TZ=Europe/Ljubljana
     volumes:
-      - /f/docker/media/jellyfin:/config
-      - /f/media/series:/data/tvshows
-      - /f/media/movies:/data/movies
+      - ${CONFIG}/jellyfin:/config
+      - ${MEDIA}/series:/data/tvshows
+      - ${MEDIA}/movies:/data/movies
     expose:
       - 8096
       - 8920 #optional
@@ -141,7 +141,7 @@ services:
       expose:
           - 80
       volumes:
-          - /f/docker/media/organize:/config
+          - ${CONFIG}/organize:/config
       environment:
           - PUID=1000
           - PGID=1000
