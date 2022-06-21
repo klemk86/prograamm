@@ -104,9 +104,5 @@ services:
       - ${MEDIA}/series:/data/tvshows
       - ${MEDIA}/movies:/data/movies
     ports:
-      - 12000:8096
+      - 11001:8096
     restart: unless-stopped
-
-volumes:
-  caddy_data: {}
-    
