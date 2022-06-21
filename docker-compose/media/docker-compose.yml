@@ -1,28 +1,5 @@
 version: '3.8'
 services:
-  caddy:
-    container_name: caddy
-    image: caddy
-    hostname: caddy
-    restart: unless-stopped
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ${CONFIG}/caddy/etc:/etc/caddy
-      - ${CONFIG}/caddy/srv:/srv
-      - ${CONFIG}/caddy/data:/data
-   
-  homer:
-    container_name: homer
-    image: b4bz/homer:latest
-    hostname: homer
-    restart: unless-stopped
-    expose:
-      - 8080
-    volumes:
-      - ${CONFIG}/homer:/www/assets
-
   jackett:
     image: cr.hotio.dev/hotio/jackett:latest
     container_name: jackett
@@ -34,8 +11,8 @@ services:
     volumes:
       - ${CONFIG}/jackett:/config
       - ${MEDIA}/downloads:/downloads
-    expose:
-      - 9117
+    ports:
+      - 10001:9117
     restart: unless-stopped
   
   qbittorrent:
@@ -50,10 +27,8 @@ services:
     volumes:
       - ${CONFIG}/qbit:/config
       - ${MEDIA}/downloads:/downloads
-    expose:
-      - 8080
-      - 6881
-      - 6881/udp
+    ports:
+      - 10000:8080
     restart: unless-stopped
 
   bazarr:
@@ -68,8 +43,8 @@ services:
       - ${CONFIG}/bazarr:/config
       - ${MEDIA}/movies:/movies #optional
       - ${MEDIA}/series:/tv #optional
-    expose:
-      - 6767
+    ports:
+      - 10005:6767
 
   radarr:
     image: cr.hotio.dev/hotio/radarr:latest
@@ -82,8 +57,8 @@ services:
       - ${CONFIG}/radarr:/config
       - ${MEDIA}/movies:/movies #optional
       - ${MEDIA}/downloads:/downloads #optional
-    expose:
-      - 7878
+    ports:
+      - 10003:7878
     restart: unless-stopped
 
   sonarr:
@@ -98,8 +73,8 @@ services:
       - ${CONFIG}/sonarr:/config
       - ${MEDIA}/series:/tv #optional
       - ${MEDIA}/downloads:/downloads #optional
-    expose:
-      - 8989
+    ports:
+      - 10004:8989
     restart: unless-stopped
 
   ombi:
@@ -112,8 +87,8 @@ services:
       - TZ=Europe/Ljubljana
     volumes:
       - ${CONFIG}/ombi:/config
-    expose:
-      - 3579
+    ports:
+      - 11000:3579
     restart: unless-stopped
 
   jellyfin:
@@ -128,28 +103,10 @@ services:
       - ${CONFIG}/jellyfin:/config
       - ${MEDIA}/series:/data/tvshows
       - ${MEDIA}/movies:/data/movies
-    expose:
-      - 8096
-      - 8920 #optional
-      - 7359/udp #optional
-      - 1900/udp #optional
+    ports:
+      - 12000:8096
     restart: unless-stopped
 
-  organizr:
-      container_name: organizr
-      hostname: organizr
-      image: organizr/organizr:latest
-      restart: unless-stopped
-      expose:
-          - 80
-      volumes:
-          - ${CONFIG}/organize:/config
-      environment:
-          - PUID=1000
-          - PGID=1000
-          - TZ=Europe/Ljubljana
-  
-    
 volumes:
   caddy_data: {}
     
