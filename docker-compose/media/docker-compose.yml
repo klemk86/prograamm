@@ -105,4 +105,6 @@ services:
       - ${MEDIA}/movies:/data/movies
     ports:
       - 11001:8096
+      - 1900:1900/udp
+      - 7359:7359/udp
     restart: unless-stopped
