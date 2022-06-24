@@ -96,8 +96,9 @@ services:
     container_name: jellyfin
     hostname: jellyfin
     networks:
-      - macvlan
-      - default
+      macvlan:
+        ipv4_address: 192.168.1.231
+      default: {}
     environment:
       - PUID=1000
       - PGID=1000
@@ -113,6 +114,10 @@ services:
     restart: unless-stopped
 
 networks:
-     macvlan:
-        ipv4_address: 192.168.1.221
-     default: {}
+    macvlan:
+        driver: macvlan
+        driver_opts:
+            parent: eth0
+        ipam:
+            config:
+                - subnet: 192.168.1.0/24
