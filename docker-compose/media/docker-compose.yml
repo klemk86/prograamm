@@ -97,7 +97,7 @@ services:
     hostname: jellyfin
     networks:
       macvlan:
-        ipv4_address: 192.168.1.231
+        ipv4_address: 192.168.65.231
       default: {}
     environment:
       - PUID=1000
@@ -120,4 +120,4 @@ networks:
             parent: eth0
         ipam:
             config:
-                - subnet: 192.168.1.0/24
+                - subnet: 192.168.65.0/24
