@@ -95,10 +95,7 @@ services:
     image: cr.hotio.dev/hotio/jellyfin:latest
     container_name: jellyfin
     hostname: jellyfin
-    networks:
-      macvlan:
-        ipv4_address: 192.168.65.231
-      default: {}
+    network_mode: host
     environment:
       - PUID=1000
       - PGID=1000
@@ -112,12 +109,3 @@ services:
       - 1900:1900/udp
       - 7359:7359/udp
     restart: unless-stopped
-
-networks:
-    macvlan:
-        driver: macvlan
-        driver_opts:
-            parent: eth0
-        ipam:
-            config:
-                - subnet: 192.168.65.0/24
