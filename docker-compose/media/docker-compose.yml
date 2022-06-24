@@ -113,10 +113,6 @@ services:
     restart: unless-stopped
 
 networks:
-    macvlan:
-        driver: macvlan
-        driver_opts:
-            parent: eth0
-        ipam:
-            config:
-                - subnet: 192.168.1.0/24
+     macvlan:
+        ipv4_address: 192.168.1.221
+     default: {}
