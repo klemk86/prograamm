@@ -90,21 +90,3 @@ services:
     ports:
       - 11000:5000
     restart: unless-stopped
-
-  jellyfin:
-    image: cr.hotio.dev/hotio/jellyfin:latest
-    container_name: jellyfin
-    hostname: jellyfin
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Ljubljana
-    volumes:
-      - ${CONFIG}/jellyfin:/config
-      - ${MEDIA}/series:/data/tvshows
-      - ${MEDIA}/movies:/data/movies
-    ports:
-      - 11001:8096
-      - 1900:1900/udp
-      - 7359:7359/udp
-    restart: unless-stopped
