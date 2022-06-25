@@ -95,7 +95,6 @@ services:
     image: cr.hotio.dev/hotio/jellyfin:latest
     container_name: jellyfin
     hostname: jellyfin
-    network_mode: host
     environment:
       - PUID=1000
       - PGID=1000
