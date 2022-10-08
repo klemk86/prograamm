@@ -8,7 +8,7 @@ services:
     image: postgres:13
     restart: unless-stopped
     volumes:
-      -{DATA}/pgdata:/var/lib/postgresql/data
+      - ${DATA}/pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
@@ -28,10 +28,10 @@ services:
       timeout: 10s
       retries: 5
     volumes:
-      -{DATA}/data/data:/usr/src/paperless/data
-      -{DATA}/data/media:/usr/src/paperless/media
-      -{DATA}/data/export:/usr/src/paperless/export
-      -{DATA}/data/consume:/usr/src/paperless/consume
+      - ${DATA}/data/data:/usr/src/paperless/data
+      - ${DATA}/data/media:/usr/src/paperless/media
+      - ${DATA}/data/export:/usr/src/paperless/export
+      - ${DATA}/data/consume:/usr/src/paperless/consume
     environment:
       PAPERLESS_REDIS: redis://broker:6379
       PAPERLESS_DBHOST: db
@@ -39,10 +39,10 @@ services:
       USERMAP_UID: 1000
       USERMAP_GID: 1000
 
-      PAPERLESS_OCR_LANGUAGES: {OCR_LANG}
+      PAPERLESS_OCR_LANGUAGES: ${OCR_LANG}
 
-      PAPERLESS_TIME_ZONE: {TIME_ZONE}
+      PAPERLESS_TIME_ZONE: ${TIME_ZONE}
 
       PAPERLESS_OCR_LANGUAGE: slv
       PAPERLESS_CONSUMER_POLLING: 60
-      PAPERLESS_SECRET_KEY: {SECRET_KEY}
+      PAPERLESS_SECRET_KEY: ${SECRET_KEY}
