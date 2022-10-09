@@ -46,3 +46,7 @@ services:
       PAPERLESS_OCR_LANGUAGE: slv
       PAPERLESS_CONSUMER_POLLING: 60
       PAPERLESS_SECRET_KEY: ${SECRET_KEY}
+
+networks:
+  main:
+    external: true
